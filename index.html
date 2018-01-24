@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset=utf-8 />
-	<title>Web Page Template</title>
+	<title>Owensboro, Kentucky</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
@@ -76,13 +76,13 @@
 
 	<section>
 		<h2>about this map</h2>
-		<p>Wikipedia -  <a href="https://en.wikipedia.org/wiki/Owensboro%2C_Kentucky">Owensboro, KY</a></p>
+		<p>Wikipedia -  <a target="_blank" href="https://en.wikipedia.org/wiki/Owensboro%2C_Kentucky">Owensboro, KY</a></p>
 
 			<p>This is a map of Owensboro KY, my hometown.  Known for their barbecue, particularly mutton (an acquired taste).</p>
 
 		<ul>
-			<li>See my projects on GitHub: <a href="https://github.com/jamesc10">James C.</a></li>
-			<li>Visit my UAV website <a href="http://www.shockUAVe.com">ShockUAVe.com</a>.</li>
+			<li>See my projects on GitHub: <a target="_blank" href="https://github.com/jamesc10">James C.</a></li>
+			<li>Visit my UAV website <a target="_blank" href="http://www.shockUAVe.com">ShockUAVe.com</a>.</li>
 		</ul>
 	</section>
 
@@ -100,7 +100,7 @@
 		var map = L.map('map', options);
 
 		// request some basemap tiles and add to the map
-		var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+		var tiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/light_all/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
 			subdomains: 'abcd',
 			maxZoom: 19
