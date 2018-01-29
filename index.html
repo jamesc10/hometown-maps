@@ -6,10 +6,12 @@
 	<title>Owensboro, Kentucky</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" /> <!update to v.7 normalize css>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" />
+		<!update to v1.2 leaflet css>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet"> <!new fancy font>
 
 	<style>
 		body {
@@ -18,6 +20,7 @@
 			background: #f5f5f5;
 			font-family: "Noto Sans", sans-serif;
 			color: #3d3d3d;
+			font-size: 100% /* added to match lesson */
 		}
 
 		section {
@@ -27,13 +30,14 @@
 
 		h1 {
 			width: 960px;
-			margin: 20px auto;
-			font-family: Lora, serif;
+			margin: 20px auto; /* no margin in lesson, left as is */
+			font-family: 'Shrikhand', cursive; /*new font */
 			letter-spacing: .04em;
 		}
 
 		h2 {
-			font-family: Lora, serif;
+			font-size: 1.5em; /* added to match lesson */
+			font-family: 'Shrikhand', cursive; /* new font */
 			letter-spacing: .04em;
 		}
 
@@ -43,7 +47,7 @@
 		}
 
 		a {
-			color: #005daa;
+			color: #4fab24; /* new color for links; greenish */
 			font-weight: bold;
 			text-decoration: none;
 		}
@@ -76,9 +80,10 @@
 
 	<section>
 		<h2>about this map</h2>
-		<p>Wikipedia -  <a target="_blank" href="https://en.wikipedia.org/wiki/Owensboro%2C_Kentucky">Owensboro, KY</a></p>
+		<p>Wikipedia -  <a target="_blank" href="https://en.wikipedia.org/wiki/Owensboro%2C_Kentucky">Owensboro, KY</a></p> <! open in new window >
 
-			<p>This is a map of Owensboro KY, my hometown.  Known for their barbecue, particularly mutton (an acquired taste).</p>
+			<p>This is a map of Owensboro KY, my hometown.  Known for their barbecue, particularly mutton (an acquired taste). </p>
+			<p> Owensboro was the site of the last public hanging in the USA. Held on August 14, 1936, Rainey Bethea, a 26 year old African-American man was hanged for the rape & murder of 70 year old Lischa Edwards.  The carnival atmosphere turned ugly when the crowd started tear at the clothes and body before Bethea was dead.  Due to the embarassing spectacle, the General Assembly abolished public executions.</p>
 
 		<ul>
 			<li>See my projects on GitHub: <a target="_blank" href="https://github.com/jamesc10">James C.</a></li>
@@ -86,8 +91,10 @@
 		</ul>
 	</section>
 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet-src.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js"></script>
+	<!updated jquery & leaflet script js >
+
 	<script>
 
 		// map options
@@ -100,11 +107,28 @@
 		var map = L.map('map', options);
 
 		// request some basemap tiles and add to the map
-		var tiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/light_all/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-			subdomains: 'abcd',
-			maxZoom: 19
-		}).addTo(map);
+		// var tiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/light_all/{z}/{x}/{y}.png', {
+		// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+		// 	subdomains: 'abcd',
+		// 	maxZoom: 19
+		// }).addTo(map);
+
+//regular style map
+// 		var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+// 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+// }).addTo(map);
+
+// more interesting map, but needs labels
+var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	subdomains: 'abcd',
+	minZoom: 1,
+	maxZoom: 16,
+	ext: 'png'
+}).addTo(map);
+
+
+
 
 		// write a custom message for the Leaflet tooltip
 		var message = 'The Big O!';
