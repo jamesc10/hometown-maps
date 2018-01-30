@@ -6,12 +6,14 @@
 	<title>Owensboro, Kentucky</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" /> <!update to v.7 normalize css>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+	<!update to v.7 normalize css>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" />
-		<!update to v1.2 leaflet css>
+	<!update to v1.2 leaflet css>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet"> <!new fancy font>
+	<link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+	<!new fancy font>
 
 	<style>
 		body {
@@ -20,25 +22,30 @@
 			background: #f5f5f5;
 			font-family: "Noto Sans", sans-serif;
 			color: #3d3d3d;
-			font-size: 100% /* added to match lesson */
+			font-size: 100%/* added to match lesson */
 		}
 
 		section {
-			width: 960px;
-			margin: 20px auto;
+			width: 80%;
 		}
 
 		h1 {
-			width: 960px;
-			margin: 20px auto; /* no margin in lesson, left as is */
-			font-family: 'Shrikhand', cursive; /*new font */
+			font-size: 2em;
+			width: 100%;
+			font-family: 'Shrikhand', cursive;
+			/*new font */
 			letter-spacing: .04em;
+			text-align: center;
 		}
 
 		h2 {
-			font-size: 1.5em; /* added to match lesson */
-			font-family: 'Shrikhand', cursive; /* new font */
+			font-size: 1.5em;
+			/* added to match lesson */
+			font-family: 'Shrikhand', cursive;
+			/* new font */
 			letter-spacing: .04em;
+			margin: 20px auto;
+			text-align: center;
 		}
 
 		p {
@@ -47,7 +54,8 @@
 		}
 
 		a {
-			color: #4fab24; /* new color for links; greenish */
+			color: #4fab24;
+			/* new color for links; greenish */
 			font-weight: bold;
 			text-decoration: none;
 		}
@@ -63,44 +71,74 @@
 		li {
 			margin: 10px 0
 		}
+
 		#map {
-			width: 960px;
-			height: 540px;
-			margin: 10px auto;
-			border: 2px solid #d3d3d3;
+			width: 100%;
+			height: 460px;
+		}
+
+		.two-column {
+			float: left;
+			width: 49%;
+			margin-right: 1%;
+		}
+
+		.below-columns {
+			display: inline-block;
+			width: 100%;
+			margin-top: 20px;
 		}
 	</style>
 </head>
 
 <body>
-
-	<h1>Owensboro, Kentucky - Bar-B-Q Capital of the World! </h1>
-
-	<div id='map'></div>
-
 	<section>
-		<h2>about this map</h2>
-		<p>Wikipedia -  <a target="_blank" href="https://en.wikipedia.org/wiki/Owensboro%2C_Kentucky">Owensboro, KY</a></p> <! open in new window >
+		<h1>Owensboro, Kentucky </h1>
+		<div id='map'></div>
+		<h2>Bar-B-Q Capital of the World!</h2>
 
-			<p>This is a map of Owensboro KY, my hometown.  Known for their barbecue, particularly mutton (an acquired taste). </p>
-			<p> Owensboro was the site of the last public hanging in the USA. Held on August 14, 1936, Rainey Bethea, a 26 year old African-American man was hanged for the rape & murder of 70 year old Lischa Edwards.  The carnival atmosphere turned ugly when the crowd started tear at the clothes and body before Bethea was dead.  Due to the embarassing spectacle, the General Assembly abolished public executions.</p>
+		<div class="two-column">
+			<h2> My Hometown </h2>
+			<p>This is a map of Owensboro KY, my hometown. Known for their barbecue, particularly mutton (an acquired taste). The International Bar-B-Q Festival is held the second weekend in May every year. Ten tons of mutton, 5,000 chickens and 1500 gallons of burgoo
+				are prepared and sold during the festival.</p>
 
-		<ul>
-			<li>See my projects on GitHub: <a target="_blank" href="https://github.com/jamesc10">James C.</a></li>
-			<li>Visit my UAV website <a target="_blank" href="http://www.shockUAVe.com">ShockUAVe.com</a>.</li>
-		</ul>
+			<p>Wikipedia - <a target="_blank" href="https://en.wikipedia.org/wiki/Owensboro%2C_Kentucky">Owensboro, KY</a></p>
+		</div>
+
+
+		<div class="two-column">
+			<h2> Historical Fact </h2>
+			<p> Owensboro was the site of the last public hanging in the USA. Held on August 14, 1936, Rainey Bethea, a 26 year old African-American man was hanged for the rape & murder of 70 year old Lischa Edwards. The carnival atmosphere turned ugly when the crowd
+				started tearing at the clothes and body before Bethea was dead. Due to the embarassing spectacle, the General Assembly abolished public executions.</p>
+		</div>
+
+		<div class="below-columns">
+			<button id="clickme_id">International BBQ Festival</button>
+			<div id="photos_id"></div>
+
+			<ul>
+				<li>See my projects on GitHub: <a target="_blank" href="https://github.com/jamesc10">James C.</a></li>
+				<li>Visit my UAV website <a target="_blank" href="http://www.shockUAVe.com">ShockUAVe.com</a>.</li>
+			</ul>
+		</div>
 	</section>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js"></script>
 	<!updated jquery & leaflet script js >
 
 	<script>
+		// show photograph
+		clickme_id.addEventListener('click', function() {
+			document.getElementById('photos_id').innerHTML = '<img src="http://bbqfest.com/_uploads/BBQ-Fest-View-3.jpg" width="100%"" alt="BBQ Festival">';
+		});
+
+
 
 		// map options
 		var options = {
 			center: [37.757778, -87.118333], // lat/lon values
-			zoom:13
+			zoom: 13
 		}
 
 		// create a Leaflet map in our division container with id of 'map'
@@ -113,22 +151,19 @@
 		// 	maxZoom: 19
 		// }).addTo(map);
 
-//regular style map
-// 		var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-// 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-// }).addTo(map);
+		//regular style map
+		var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+		}).addTo(map);
 
-// more interesting map, but needs labels
-var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	subdomains: 'abcd',
-	minZoom: 1,
-	maxZoom: 16,
-	ext: 'png'
-}).addTo(map);
-
-
-
+		// more interesting map, but needs labels
+		// var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+		// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		// 	subdomains: 'abcd',
+		// 	minZoom: 1,
+		// 	maxZoom: 16,
+		// 	ext: 'png'
+		// }).addTo(map);
 
 		// write a custom message for the Leaflet tooltip
 		var message = 'The Big O!';
@@ -138,7 +173,6 @@ var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/w
 			.bindTooltip(message)
 			.addTo(map)
 			.openTooltip();
-
 	</script>
 
 </body>
