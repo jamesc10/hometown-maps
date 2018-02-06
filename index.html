@@ -122,18 +122,18 @@
 		// }).addTo(map);
 
 		//regular style map - used in small screen branch for Challenge
-		// 		var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-		// 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-		// }).addTo(map);
+				var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+		}).addTo(map);
 
 		// more interesting map, but needs labels
-		var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-			attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-			subdomains: 'abcd',
-			minZoom: 1,
-			maxZoom: 16,
-			ext: 'png'
-		}).addTo(map);
+		// var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+		// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		// 	subdomains: 'abcd',
+		// 	minZoom: 1,
+		// 	maxZoom: 16,
+		// 	ext: 'png'
+		// }).addTo(map);
 
 
 		// write a custom message for the Leaflet tooltip
@@ -144,6 +144,35 @@
 			.bindTooltip(message)
 			.addTo(map)
 			.openTooltip();
+
+		// Location data
+		var location0name = "Owensboro Convention Center",
+			location0coords = [37.776300, -87.11682],
+			location0details = "501 West 2nd Street";
+
+		var location1name = "Moonlight BBQ Inn",
+			location1coords = [37.756786, -87.148987],
+			location1details = "2840 West Parrish Ave.";
+
+		// data arrays
+		var hotspots = [location0name, location1name],
+			place = [location0coords, location1coords],
+			address = [location0details, location1details];
+
+		var location0Tooltip = "<b>" + hotspots[0] + "</b>" +
+			      "<br><b>Address</b>: " + address[0];
+
+			L.marker(place[0])
+	      .addTo(map) // add it to the map
+	      .bindTooltip(location0Tooltip); // bind the tooltip
+
+		var location1Tooltip = "<b>" + hotspots[1] + "</b>" +
+						"<br><b>Address</b>: " + address[1];
+
+			L.marker(place[1])
+				.addTo(map) // add it to the map
+				.bindTooltip(location1Tooltip); // bind the tooltip
+
 	</script>
 
 </body>
