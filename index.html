@@ -159,6 +159,7 @@
 			place = [location0coords, location1coords],
 			address = [location0details, location1details];
 
+		// tooltip & marker - 0
 		var location0Tooltip = "<b>" + hotspots[0] + "</b>" +
 			      "<br><b>Address</b>: " + address[0];
 
@@ -166,6 +167,7 @@
 	      .addTo(map) // add it to the map
 	      .bindTooltip(location0Tooltip); // bind the tooltip
 
+		//tooltip & marker - 1
 		var location1Tooltip = "<b>" + hotspots[1] + "</b>" +
 						"<br><b>Address</b>: " + address[1];
 
