@@ -92,7 +92,8 @@
 		<!-- open in new window -->
 
 		<p>This is a map of Owensboro KY, my hometown. Known for their barbecue, particularly mutton (an acquired taste). </p>
-		<p>Owensboro was the site of the last public hanging in the USA. Held on August 14, 1936, Rainey Bethea, a 26-year-old African-American man was hanged for the rape & murder of 70-year-old Lischa Edwards. The carnival atmosphere turned ugly when the crowd started to tear at the clothes and body before Bethea was dead. Due to the embarrassing spectacle, the General Assembly abolished public executions.</p>
+		<p>Owensboro was the site of the last public hanging in the USA. Held on August 14, 1936, Rainey Bethea, a 26-year-old African-American man was hanged for the rape & murder of 70-year-old Lischa Edwards. The carnival atmosphere turned ugly when the crowd
+			started to tear at the clothes and body before Bethea was dead. Due to the embarrassing spectacle, the General Assembly abolished public executions.</p>
 
 		<ul>
 			<li>See my projects on GitHub: <a target="_blank" href="https://github.com/jamesc10">James C.</a></li>
@@ -122,7 +123,7 @@
 		// }).addTo(map);
 
 		//regular style map - used in small screen branch for Challenge
-				var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+		var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
 			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 		}).addTo(map);
 
@@ -145,36 +146,39 @@
 			.addTo(map)
 			.openTooltip();
 
-		// Location data
-		var location0name = "Owensboro Convention Center",
-			location0coords = [37.776300, -87.11682],
-			location0details = "501 West 2nd Street";
+		// Location data, apologies for using different variable names
+		var locationName = ["Owensboro Convention Center", "Moonlight BBQ Inn", "Old Hickory"];
 
-		var location1name = "Moonlight BBQ Inn",
-			location1coords = [37.756786, -87.148987],
-			location1details = "2840 West Parrish Ave.";
+		var locationCoords = [
+			[37.776300, -87.11682],
+			[37.756786, -87.148987],
+			[37.751331, -87.113140]
+		];
+		var locationAddr = ["501 West 2nd Street", "2840 West Parrish Ave.", "338 Washington Ave."];
 
-		// data arrays
-		var hotspots = [location0name, location1name],
-			place = [location0coords, location1coords],
-			address = [location0details, location1details];
+		var locationPic = ["<img src = images/owensboro_riverfront.jpg width = '200px' height = '150px'>", "<img src = images/muttoninfo.jpg width ='200px' height ='150px'>", "<img src = images/old-hickory-pit-bar-b.jpg width ='200px' height ='150px'>"];
 
-		// tooltip & marker - 0
-		var location0Tooltip = "<b>" + hotspots[0] + "</b>" +
-			      "<br><b>Address</b>: " + address[0];
+		var isItBbq = [false, true, true]; // is this a BBQ place?
 
-			L.marker(place[0])
-	      .addTo(map) // add it to the map
-	      .bindTooltip(location0Tooltip); // bind the tooltip
+		// if a BBQ place, flag it!
+		for (var i = 0; i < locationName.length; i++) {
+			if (isItBbq[i] == true) {
+				var yesItIsBbq = "<b>Get your BBQ Here</b> <br> ";
+			} else {
+				var yesItIsBbq = ""; //if not, say nothing
+			}
+			// build Popup
+			var locationPopup = "<h2>" + locationName[i] + "</h2>" +
+				"Address: " + locationAddr[i] +
+				"<br>" + locationPic[i] +
+				"<br>" + yesItIsBbq;
 
-		//tooltip & marker - 1
-		var location1Tooltip = "<b>" + hotspots[1] + "</b>" +
-						"<br><b>Address</b>: " + address[1];
+			// tooltip & marker
 
-			L.marker(place[1])
+			L.marker(locationCoords[i])
 				.addTo(map) // add it to the map
-				.bindTooltip(location1Tooltip); // bind the tooltip
-
+				.bindPopup(locationPopup); // bind the data to the popup
+		};
 	</script>
 
 </body>
