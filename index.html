@@ -165,7 +165,8 @@
 		var typeIconURL = [
 			"maki_svg/icons/lodging-15.svg",
 			"maki_svg/icons/bbq-15.svg",
-			"maki_svg/icons/star-15.svg"];
+			"maki_svg/icons/star-15.svg"
+		];
 
 		// if a BBQ place, flag it!
 		for (var i = 0; i < locationName.length; i++) {
@@ -185,8 +186,8 @@
 			// tooltip & marker
 
 			L.marker(locationCoords[i], {
-				icon: iconLocation
-			})
+					icon: iconLocation
+				})
 				.addTo(map) // add it to the map
 				.bindPopup(locationPopup); // bind the data to the popup
 		};
@@ -194,32 +195,29 @@
 		// Function to determine type of location and return appropriate Leaflet icon object
 
 		function createIcon(typeOfLocation) {
-		  var iconURL = "", // declare the iconURL
-		      iconSize = 30; // create default size
+			var iconURL = "", // declare the iconURL
+				iconSize = 30; // create default size
 
-		  if (typeOfLocation == "Lodging") {
-		      iconURL = typeIconURL[0];
-		  } else if (typeOfLocation == "BBQ") {
-		      iconURL = typeIconURL[1];
-		      iconSize = 40;
-		  } else {
+			if (typeOfLocation == "Lodging") {
+				iconURL = typeIconURL[0];
+			} else if (typeOfLocation == "BBQ") {
+				iconURL = typeIconURL[1];
+				iconSize = 40;
+			} else {
 				iconURL = typeIconURL[2];
 			};
 
-		  // Create a Leaflet icon object
-		  var result = L.icon({
-		      iconUrl: iconURL,
-		      iconSize: iconSize,
-		      popupAnchor: [0, -15] // Center of your icon is [0,0]
-		  });
+			// Create a Leaflet icon object
+			var result = L.icon({
+				iconUrl: iconURL,
+				iconSize: iconSize,
+				popupAnchor: [0, -15] // Center of your icon is [0,0]
+			});
 
-		  // Function returns a properly formatted Leaf icon object to place on your map
-		  return result;
+			// Function returns a properly formatted Leaf icon object to place on your map
+			return result;
 
 		};
-
-
-
 	</script>
 
 </body>
