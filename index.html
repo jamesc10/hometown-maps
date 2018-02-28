@@ -109,7 +109,7 @@
 		// map options
 		var options = {
 			center: [37.757778, -87.118333], // lat/lon values
-			zoom: 13
+			zoom: 12
 		}
 
 		// create a Leaflet map in our division container with id of 'map'
@@ -146,53 +146,127 @@
 			.addTo(map)
 			.openTooltip();
 
-		// Location data, apologies for using different variable names
-		var locationName = ["Owensboro Convention Center", "Moonlight BBQ Inn", "Old Hickory"];
+		// Location data
 
-		var locationCoords = [
-			[37.776300, -87.11682],
-			[37.756786, -87.148987],
-			[37.751331, -87.113140]
+		var myLocations = [
+			{
+				name: "Owensboro Convention Center",
+				properties: {
+					coordinates: [37.776300, -87.11682],
+					type: "Lodging",
+					address: "501 West 2nd Street",
+					phone: "270-123-4567",
+					website: "http://www.owensborocenter.com/"
+				}
+			},
+			{
+				name: "Moonlight BBQ Inn",
+				properties: {
+					coordinates: [37.756786, -87.148987],
+					type: "BBQ",
+					address: "2840 West Parrish Ave.",
+					phone: "270-684-7929",
+					website: "http://www.moonlite.com/"
+				}
+			},
+			{
+				name: "Old Hickory",
+				properties: {
+					coordinates: [37.751331, -87.113140],
+					type: "BBQ",
+					address: "338 Washington Ave.",
+					phone: "270-926-9000",
+					website: "http://oldhickorybar-b-q.com/"
+				}
+			},
+			{
+				name: "Ole South Barbeque",
+				properties: {
+					coordinates: [37.752537, -87.054132],
+					type: "BBQ",
+					address: "3523 KY-54 Highway",
+					phone: "270-926-6464",
+					website: "http://olesouthbbq.com"
+				}
+			},
+			{
+				name: "Grillin & Chillin BBQ",
+				properties: {
+					coordinates: [37.744217, -87.108320],
+					type: "BBQ",
+					address: "3006 Allen St.",
+					phone: "270-570-0243",
+					website: "https://www.grillinandchillinbbq.com/"
+				}
+			},
+			{
+				name: "Legion Park",
+				properties: {
+					coordinates: [37.740984, -87.105062],
+					type: "Park",
+					address: "3047 Legion Park Dr",
+					phone: "270-687-8713",
+					website: "https://www.owensboroparks.org/"
+				}
+			},
+			{
+				name: "Ben Hawes Park",
+				properties: {
+					coordinates: [37.796312, -87.183557],
+					type: "Park",
+					address: "400 Booth Field Rd.",
+					phone: "270-687-7134",
+					website: "https://www.owensboroparks.org/"
+				}
+			},
+			{
+				name: "Fairfield Inn",
+				properties: {
+					coordinates: [37.725810, -87.121980],
+					type: "Lodging",
+					address: "800 Salem Dr",
+					phone: "20-688-8887",
+					website: "https://www.marriott.com/hotels/travel/owbfi-fairfield-inn-owensboro/"
+				}
+			}
 		];
-		var locationAddr = ["501 West 2nd Street", "2840 West Parrish Ave.", "338 Washington Ave."];
-
-		var locationPic = ["<img src = images/owensboro_riverfront.jpg width = '200px' height = '150px'>", "<img src = images/muttoninfo.jpg width ='200px' height ='150px'>", "<img src = images/old-hickory-pit-bar-b.jpg width ='200px' height ='150px'>"];
-
-		var isItBbq = [false, true, true]; // is this a BBQ place?
-
-		var typeLocation = ["Lodging", "BBQ", "BBQ"];
 
 		var typeIconURL = [
-			"maki_svg/icons/lodging-15.svg",
-			"maki_svg/icons/bbq-15.svg",
-			"maki_svg/icons/star-15.svg"
-		];
+					"svgs/lodging-15.svg",
+					"svgs/bbq-15.svg",
+					"svgs/star-15.svg"
+				];
 
 		// if a BBQ place, flag it!
-		for (var i = 0; i < locationName.length; i++) {
-			if (isItBbq[i] == true) {
+		for (var i = 0; i < myLocations.length; i++) {
+			if (myLocations[i].properties.type == "BBQ") {
 				var yesItIsBbq = "<b>Get your BBQ Here</b> <br> ";
 			} else {
 				var yesItIsBbq = ""; //if not, say nothing
 			}
 			// build Popup
-			var locationPopup = "<h2>" + locationName[i] + "</h2>" +
-				"Address: " + locationAddr[i] +
-				"<br>" + locationPic[i] +
+			var locationPopup = "<h2>" + myLocations[i].name + "</h2>" +
+				"Address: " + myLocations[i].properties.address +
+				"<br>" + "Phone Number: " + myLocations[i].properties.phone +
+				"<br>" + "Website: <a href='" +
+			  myLocations[i].properties.website +
+    	"'>" +
+   			myLocations[i].properties.website +
+    	"</a>" +
 				"<br>" + yesItIsBbq;
 
-			var iconLocation = createIcon(typeLocation[i]);
+			var iconLocation = createIcon(myLocations[i].properties.type);
 
 			// tooltip & marker
 
-			L.marker(locationCoords[i], {
+			L.marker(myLocations[i].properties.coordinates, {
 					icon: iconLocation
 				})
 				.addTo(map) // add it to the map
 				.bindPopup(locationPopup); // bind the data to the popup
 		};
 
-		// Function to determine type of location and return appropriate Leaflet icon object
+		//Function to determine type of location and return appropriate Leaflet icon object
 
 		function createIcon(typeOfLocation) {
 			var iconURL = "", // declare the iconURL
@@ -202,7 +276,6 @@
 				iconURL = typeIconURL[0];
 			} else if (typeOfLocation == "BBQ") {
 				iconURL = typeIconURL[1];
-				iconSize = 40;
 			} else {
 				iconURL = typeIconURL[2];
 			};
@@ -211,7 +284,7 @@
 			var result = L.icon({
 				iconUrl: iconURL,
 				iconSize: iconSize,
-				popupAnchor: [0, -15] // Center of your icon is [0,0]
+				popupAnchor: [0, 0] // Center of your icon is [0,0]
 			});
 
 			// Function returns a properly formatted Leaf icon object to place on your map
