@@ -221,10 +221,11 @@
 			if (myLocations[i].properties.type == "BBQ") {
 				locationPopup += "<br><b>Get your BBQ Here</b> <br> ";
 			}
-
+			
+			// get Leaflet icon based on type
 			var icon = createIcon(myLocations[i].properties.type);
-
-
+			
+			// create new marker with icon
 			L.marker(myLocations[i].properties.coordinates, {
 					icon: icon
 				})
@@ -233,7 +234,6 @@
 		};
 
 		//Function to determine type of location and return appropriate Leaflet icon object
-
 		function createIcon(typeOfLocation) {
 
 			// object to map type to SVG path
