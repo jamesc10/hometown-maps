@@ -115,39 +115,12 @@
 		// create a Leaflet map in our division container with id of 'map'
 		var map = L.map('map', options);
 
-		// request some basemap tiles and add to the map
-		// var tiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/light_all/{z}/{x}/{y}.png', {
-		// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-		// 	subdomains: 'abcd',
-		// 	maxZoom: 19
-		// }).addTo(map);
-
 		//regular style map - used in small screen branch for Challenge
 		var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
 			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 		}).addTo(map);
 
-		// more interesting map, but needs labels
-		// var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-		// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-		// 	subdomains: 'abcd',
-		// 	minZoom: 1,
-		// 	maxZoom: 16,
-		// 	ext: 'png'
-		// }).addTo(map);
-
-
-		// write a custom message for the Leaflet tooltip
-		var message = 'The Big O!';
-
-		// add a marker to the center of the map and open the tooltip
-		L.marker(map.getCenter())
-			.bindTooltip(message)
-			.addTo(map)
-			.openTooltip();
-
 		// Location data
-
 		var myLocations = [
 			{
 				name: "Owensboro Convention Center",
@@ -231,19 +204,9 @@
 			}
 		];
 
-		var typeIconURL = [
-					"svgs/lodging-15.svg",
-					"svgs/bbq-15.svg",
-					"svgs/star-15.svg"
-				];
-
 		// if a BBQ place, flag it!
 		for (var i = 0; i < myLocations.length; i++) {
-			if (myLocations[i].properties.type == "BBQ") {
-				var yesItIsBbq = "<b>Get your BBQ Here</b> <br> ";
-			} else {
-				var yesItIsBbq = ""; //if not, say nothing
-			}
+
 			// build Popup
 			var locationPopup = "<h2>" + myLocations[i].name + "</h2>" +
 				"Address: " + myLocations[i].properties.address +
@@ -252,15 +215,18 @@
 			  myLocations[i].properties.website +
     	"'>" +
    			myLocations[i].properties.website +
-    	"</a>" +
-				"<br>" + yesItIsBbq;
+    	"</a>";
+			
+			// if it's a bbq, concat more info
+			if (myLocations[i].properties.type == "BBQ") {
+				locationPopup += "<br><b>Get your BBQ Here</b> <br> ";
+			}
 
-			var iconLocation = createIcon(myLocations[i].properties.type);
+			var icon = createIcon(myLocations[i].properties.type);
 
-			// tooltip & marker
 
 			L.marker(myLocations[i].properties.coordinates, {
-					icon: iconLocation
+					icon: icon
 				})
 				.addTo(map) // add it to the map
 				.bindPopup(locationPopup); // bind the data to the popup
@@ -269,27 +235,20 @@
 		//Function to determine type of location and return appropriate Leaflet icon object
 
 		function createIcon(typeOfLocation) {
-			var iconURL = "", // declare the iconURL
-				iconSize = 30; // create default size
 
-			if (typeOfLocation == "Lodging") {
-				iconURL = typeIconURL[0];
-			} else if (typeOfLocation == "BBQ") {
-				iconURL = typeIconURL[1];
-			} else {
-				iconURL = typeIconURL[2];
-			};
+			// object to map type to SVG path
+			var typeIconURLs = {
+						Lodging: "svgs/lodging-15.svg",
+						BBQ: "svgs/bbq-15.svg",
+						Park: "svgs/star-15.svg"
+				};
 
-			// Create a Leaflet icon object
-			var result = L.icon({
-				iconUrl: iconURL,
-				iconSize: iconSize,
+			// Create and return Leaflet icon object
+			return L.icon({
+				iconUrl: typeIconURLs[typeOfLocation],
+				iconSize: 30,
 				popupAnchor: [0, 0] // Center of your icon is [0,0]
 			});
-
-			// Function returns a properly formatted Leaf icon object to place on your map
-			return result;
-
 		};
 	</script>
 
