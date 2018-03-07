@@ -131,15 +131,6 @@
 			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 		}).addTo(map);
 
-		// write a custom message for the Leaflet tooltip
-		var message = 'The Big O!';
-
-		// add a marker to the center of the map and open the tooltip
-		L.marker(map.getCenter())
-			.bindTooltip(message)
-			.addTo(map)
-			.openTooltip();
-
 		// Location data
 
 		var myLocations = [
