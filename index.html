@@ -109,34 +109,27 @@
 	<script>
 		// map options
 		var options = {
-			center: [37.757778, -87.118333], // lat/lon values
-			zoom: 12
+			center: [37.75093, -87.1000], // lat/lon values
+			zoom: 12.4,
+			zoomSnap: .1
 		}
 
 		// create a Leaflet map in our division container with id of 'map'
 		var map = L.map('map', options);
 
-		// request some basemap tiles and add to the map
-		// var tiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/light_all/{z}/{x}/{y}.png', {
-		// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-		// 	subdomains: 'abcd',
-		// 	maxZoom: 19
-		// }).addTo(map);
+		// restrict map to bounds
+		map.setMaxBounds(map.getBounds());
+		
+		// set min and max zoom level
+		map.setMinZoom(map.getZoom() - 2);
+		map.setMaxZoom(map.getZoom() + 2);
+
+
 
 		//regular style map - used in small screen branch for Challenge
 		var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
 			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 		}).addTo(map);
-
-		// more interesting map, but needs labels
-		// var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-		// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-		// 	subdomains: 'abcd',
-		// 	minZoom: 1,
-		// 	maxZoom: 16,
-		// 	ext: 'png'
-		// }).addTo(map);
-
 
 		// write a custom message for the Leaflet tooltip
 		var message = 'The Big O!';
@@ -325,8 +318,6 @@
 			}
 
 		}).addTo(map);
-
-		map.fitBounds(myRoute.getBounds());
 		
 	</script>
 
