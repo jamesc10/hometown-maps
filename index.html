@@ -104,6 +104,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
 	<!-- updated jquery & leaflet script js -->
+	<script src="data/route.js"></script>
 
 	<script>
 		// map options
@@ -291,6 +292,42 @@
 			return result;
 
 		};
+
+		var myRoute = L.geoJson(routeData, {
+
+			filter: function(feature) {
+				if (feature.geometry.type == "LineString") {
+					return feature;
+				}
+			},
+			style: function(feature) {
+
+				return {
+					color: "#28ff19",
+					weight: 4,
+					opacity: .8,
+					dashArray: "5, 5"
+				}
+			}
+
+		}).addTo(map);
+
+		var myStops = L.geoJson(routeData, {
+
+			filter: function(feature) {
+				if (feature.geometry.type == "Point") {
+					return feature;
+				}
+			},
+			onEachFeature: function(feature, layer) {
+
+				layer.bindTooltip(feature.properties.name);
+			}
+
+		}).addTo(map);
+
+		map.fitBounds(myRoute.getBounds());
+		
 	</script>
 
 </body>
