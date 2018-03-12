@@ -118,6 +118,7 @@
 		var map = L.map('map', options);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		// restrict map to bounds
 		map.setMaxBounds(map.getBounds());
@@ -129,11 +130,14 @@
 
 
 >>>>>>> eval7
+=======
+>>>>>>> eval6
 		//regular style map - used in small screen branch for Challenge
 		var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
 			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 		}).addTo(map);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// write a custom message for the Leaflet tooltip
 		var message = 'The Big O!';
@@ -146,8 +150,9 @@
 
 =======
 >>>>>>> eval7
+=======
+>>>>>>> eval6
 		// Location data
-
 		var myLocations = [
 			{
 				name: "Owensboro Convention Center",
@@ -231,19 +236,9 @@
 			}
 		];
 
-		var typeIconURL = [
-					"svgs/lodging-15.svg",
-					"svgs/bbq-15.svg",
-					"svgs/star-15.svg"
-				];
-
 		// if a BBQ place, flag it!
 		for (var i = 0; i < myLocations.length; i++) {
-			if (myLocations[i].properties.type == "BBQ") {
-				var yesItIsBbq = "<b>Get your BBQ Here</b> <br> ";
-			} else {
-				var yesItIsBbq = ""; //if not, say nothing
-			}
+
 			// build Popup
 			var locationPopup = "<h2>" + myLocations[i].name + "</h2>" +
 				"Address: " + myLocations[i].properties.address +
@@ -252,44 +247,40 @@
 			  myLocations[i].properties.website +
     	"'>" +
    			myLocations[i].properties.website +
-    	"</a>" +
-				"<br>" + yesItIsBbq;
-
-			var iconLocation = createIcon(myLocations[i].properties.type);
-
-			// tooltip & marker
-
+    	"</a>";
+			
+			// if it's a bbq, concat more info
+			if (myLocations[i].properties.type == "BBQ") {
+				locationPopup += "<br><b>Get your BBQ Here</b> <br> ";
+			}
+			
+			// get Leaflet icon based on type
+			var icon = createIcon(myLocations[i].properties.type);
+			
+			// create new marker with icon
 			L.marker(myLocations[i].properties.coordinates, {
-					icon: iconLocation
+					icon: icon
 				})
 				.addTo(map) // add it to the map
 				.bindPopup(locationPopup); // bind the data to the popup
 		};
 
 		//Function to determine type of location and return appropriate Leaflet icon object
-
 		function createIcon(typeOfLocation) {
-			var iconURL = "", // declare the iconURL
-				iconSize = 30; // create default size
 
-			if (typeOfLocation == "Lodging") {
-				iconURL = typeIconURL[0];
-			} else if (typeOfLocation == "BBQ") {
-				iconURL = typeIconURL[1];
-			} else {
-				iconURL = typeIconURL[2];
-			};
+			// object to map type to SVG path
+			var typeIconURLs = {
+						Lodging: "svgs/lodging-15.svg",
+						BBQ: "svgs/bbq-15.svg",
+						Park: "svgs/star-15.svg"
+				};
 
-			// Create a Leaflet icon object
-			var result = L.icon({
-				iconUrl: iconURL,
-				iconSize: iconSize,
+			// Create and return Leaflet icon object
+			return L.icon({
+				iconUrl: typeIconURLs[typeOfLocation],
+				iconSize: 30,
 				popupAnchor: [0, 0] // Center of your icon is [0,0]
 			});
-
-			// Function returns a properly formatted Leaf icon object to place on your map
-			return result;
-
 		};
 
 		var myRoute = L.geoJson(routeData, {
