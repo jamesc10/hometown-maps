@@ -109,18 +109,32 @@
 	<script>
 		// map options
 		var options = {
-			center: [37.757778, -87.118333], // lat/lon values
-			zoom: 12
+			center: [37.75093, -87.1000], // lat/lon values
+			zoom: 12.4,
+			zoomSnap: .1
 		}
 
 		// create a Leaflet map in our division container with id of 'map'
 		var map = L.map('map', options);
 
+<<<<<<< HEAD
+=======
+		// restrict map to bounds
+		map.setMaxBounds(map.getBounds());
+		
+		// set min and max zoom level
+		map.setMinZoom(map.getZoom() - 2);
+		map.setMaxZoom(map.getZoom() + 2);
+
+
+
+>>>>>>> eval7
 		//regular style map - used in small screen branch for Challenge
 		var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
 			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 		}).addTo(map);
 
+<<<<<<< HEAD
 		// write a custom message for the Leaflet tooltip
 		var message = 'The Big O!';
 
@@ -130,6 +144,8 @@
 			.addTo(map)
 			.openTooltip();
 
+=======
+>>>>>>> eval7
 		// Location data
 
 		var myLocations = [
@@ -308,8 +324,6 @@
 			}
 
 		}).addTo(map);
-
-		map.fitBounds(myRoute.getBounds());
 		
 	</script>
 
